@@ -13,20 +13,14 @@ const commands = [
 	'git push origin master'
 ]
 
-cron.schedule('53 * * * *', () => {
-	for(let i = 0; i < commands.length; i++) {
-		console.log(commands[i])
+cron.schedule('17 * * * *', () => {
 
-		exec(commands[i], (error, stdout, stderr) => {
-		  if (error) {
-		    console.error(error)
-		    return
-		  }
-		  console.log(`stdout: ${stdout}`)
-		  console.error(`stderr: ${stderr}`)
-		})
-
-	}
-	console.log('Data successfully backed up.')
+	exec(commands.join('&'), (error, stdout, stderr) => {
+	  if (error) {
+	    return console.error(error)
+	  }
+	  if(stderr) console.log(stderr)
+	  if(stdout) console.log(stdout)
+	})
  
 }, { timezone: 'Asia/Kolkata' })

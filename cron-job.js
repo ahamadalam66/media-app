@@ -13,7 +13,7 @@ const commands = [
 	'git push origin master'
 ]
 
-cron.schedule('17 * * * *', () => {
+cron.schedule('0 0 * * *', () => {
 
 	exec(commands.join('&'), (error, stdout, stderr) => {
 	  if (error) {
